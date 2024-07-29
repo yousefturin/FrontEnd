@@ -1,0 +1,29 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+}
+.header-search input{
+    outline: none;
+    border: none;
+    background-color: transparent;   
+    padding: 1rem 1rem;
+}
+.header-title{
+    padding: 1rem 0;
+}
+.header-search{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #EAEAEA;
+    padding: 0 1rem;
+    border-radius: 8rem;
+}
+.header-search input::placeholder{
+    color: #A0A0A0;
+}
+

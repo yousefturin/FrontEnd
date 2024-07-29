@@ -1,0 +1,111 @@
+.dashboard {
+    display: flex;
+    height: clamp(100vh, 100%, 100%);
+}
+
+.left-menu {
+    width: clamp(280px, 30%, 380px);
+    display: inherit;
+    background-color: #EAEAEA;
+    flex-direction: column;
+    border-right: 1px solid #D0CECE;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logo-wrapper {
+    width: 100%;
+    padding: 3rem;
+
+}
+
+.right-screen {
+    width: clamp(500px, 70%, 100%);
+    background-color: #fff;
+}
+
+.btn-action p{
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #000;
+    margin: 0;
+}
+.content-action-top {
+    padding: 1rem 0 1.5rem 0;
+    
+}
+.content-action-bottom {
+    padding: 1rem 0 1.5rem 0;
+
+}
+.btn-action-icon{
+    margin-right: 2rem;
+    font-size: 1.5rem;
+    color: #fff;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.btn-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin :1rem;
+    margin-right: 2rem;
+    border-radius: 0.6rem;
+    padding: 0.6rem 4.5rem 0.6rem 2rem;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+}
+.selected-btn{
+    background-color: #fff;
+    box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+.content-help-action{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0.6rem 3.5rem 0.6rem 2rem;
+    margin-right: 2rem;
+    margin :1rem;
+    margin-left: 3rem;
+}
+.content-help-action p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #A0A0A0;
+    margin: 0.2rem;
+    cursor: pointer;
+}
+.worker-section-information{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4rem 3rem 1rem 3rem;
+    border-bottom: 1px solid #D0CECE;
+}
+
+.worker-section-information p {
+    margin: 0;
+}
+.worker-info, .date-time-information{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+.date-time-information{
+    margin: 0 0 1rem 0;
+}
+.worker-info p {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #000;
+    margin: 0;
+}

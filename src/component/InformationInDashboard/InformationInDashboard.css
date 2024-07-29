@@ -1,0 +1,31 @@
+.info-card-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
+    gap: 2rem; 
+    margin: 4rem 3rem;
+    justify-content: flex-start;
+}
+
+.info-card {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: clamp(80px, 95%, 200px);
+    height: clamp(45px, 5vw, 70px);
+    padding: 0.7rem;
+    border-radius: 1.2rem;
+    outline: 1px solid #D0CECE;
+    box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+
+}
+
+.info-card p {
+    color: #A0A0A0;
+}
+
+.info-card h2 {
+    margin: 0;
+    color:#2457C5;
+}

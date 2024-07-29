@@ -1,0 +1,73 @@
+.action-btns-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(150px, 20vw, 200px), 1fr));
+    gap: 2rem;
+    margin: 1rem 3rem;
+    justify-content: center;
+    position: relative; /* Make sure the container is relative */
+}
+
+.action-btn {
+    background-color: #EAEAEA;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 95%;
+    height: clamp(75px, 10vw, 100px);
+    padding: 0.7rem;
+    border-radius: 1.2rem;
+    outline: 1px solid #D0CECE;
+    box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.4s, width 0.3s, height 0.3s;
+    position: relative; /* Relative position for close button */
+    z-index: 1; /* Default z-index */
+}
+
+.action-btn.expanded {
+    position: absolute; /* Make it cover other buttons */
+    top: 0; /* Position it at the top */
+    left: 0; /* Position it at the left */
+    width: calc(100% - 0.5rem); /* Adjust width to cover adjacent buttons */
+    height: calc(100% + 1rem); /* Adjust height to cover adjacent buttons */
+    z-index: 10; /* Higher z-index to overlay other buttons */
+}
+
+.close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: #ff4d4d;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.close-btn:hover {
+    background: #ff1a1a;
+}
+
+.main-btn-action-icon {
+    margin: 0;
+    height: 50%;
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    margin-right: 0.7rem;
+}
+
+.action-btn h3 {
+    height: 50%;
+    margin: 0;
+    margin-left: 0.5rem;
+    margin-top: 0.3rem;
+    color: black;
+}
