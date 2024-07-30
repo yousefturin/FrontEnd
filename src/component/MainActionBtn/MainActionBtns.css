@@ -1,10 +1,11 @@
+/* MainActionBtns.css */
 .action-btns-main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(clamp(150px, 20vw, 200px), 1fr));
     gap: 2rem;
     margin: 1rem 3rem;
     justify-content: center;
-    position: relative; /* Make sure the container is relative */
+    position: relative;
 }
 
 .action-btn {
@@ -20,18 +21,20 @@
     outline: 1px solid #D0CECE;
     box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: transform 0.4s, width 0.3s, height 0.3s;
-    position: relative; /* Relative position for close button */
-    z-index: 1; /* Default z-index */
+    transition: transform 0.4s, width 0.3s, height 0.3s, box-shadow 0.3s;
+    position: relative;
+    z-index: 1;
 }
 
 .action-btn.expanded {
-    position: absolute; /* Make it cover other buttons */
-    top: 0; /* Position it at the top */
-    left: 0; /* Position it at the left */
-    width: calc(100% - 0.5rem); /* Adjust width to cover adjacent buttons */
-    height: calc(100% + 1rem); /* Adjust height to cover adjacent buttons */
-    z-index: 10; /* Higher z-index to overlay other buttons */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 0.5rem);
+    height: clamp(100%, 30vh, 50vh);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    cursor: default;
 }
 
 .close-btn {
