@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import './GeneralForm.css';
 
 function GeneralForm({ fields, actionType, onSubmit }) {
     const [defaultValues, setDefaultValues] = useState({});
 
     useEffect(() => {
-        // Set the default values based on actionType and other logic
         const initialValues = {};
         fields.forEach(field => {
             const fieldName = field.id;
@@ -18,58 +18,92 @@ function GeneralForm({ fields, actionType, onSubmit }) {
                 initialValues[fieldName] = field.defaultValue || '';
             }
         });
+
         setDefaultValues(initialValues);
-    }, [fields]);
+    }, [fields, actionType]);
 
-    const getDefaultWorkerId = () => {
-        // Replace this with your actual logic to get the worker ID
-        return "12345"; // Example Worker ID
-    };
-
-    const getDefaultState = () => {
-        if (actionType === "borrow") {
-            return "borrow";
-        } else if (actionType === "return") {
-            return "returned";
-        }
-        return "";
-    };
-
-    const getDefaultDate = () => {
-        const today = new Date();
-        return today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
-    };
+    const getDefaultWorkerId = () => "12345";
+    const getDefaultState = () => (actionType === "borrow" ? "borrow" : actionType === "return" ? "returned" : "");
+    const getDefaultDate = () => new Date().toISOString().split('T')[0];
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
         const data = {};
-        fields.forEach(field => {
-            const fieldName = field.id;
-            data[fieldName] = formData.get(fieldName) || defaultValues[fieldName] || '';
-        });
+
+        const extractData = (fields, dataObj) => {
+            fields.forEach(field => {
+                if (field.data) {
+                    dataObj[field.id] = {};
+                    extractData(field.data, dataObj[field.id]);
+                } else {
+                    dataObj[field.id] = formData.get(field.id) || defaultValues[field.id] || '';
+                }
+            });
+        };
+
+        extractData(fields, data);
+
+        // Ensure author and publisher are included as null if actionType is addBook
+        if (actionType === "addBook") {
+            data.author = null;
+            data.publisher = null;
+        }
+
         onSubmit(data);
     };
 
-    return (
-        <form onSubmit={handleSubmit} className="general-form">
-            {fields.map((field, index) => {
-                const fieldName = field.id;
-                return (
+    const renderFields = (fields, level = 0) => {
+        const rows = [];
+        let row = [];
+        let count = 0;
+
+        fields.forEach((field, index) => {
+            if (field.data) {
+                // Handle nested fields
+                if (row.length > 0) {
+                    rows.push(<div key={`row-${count}`} className="form-row">{row}</div>);
+                    row = [];
+                }
+                rows.push(
+                    <div key={`nested-${index}`} className="nested-fields">
+                        {renderFields(field.data, level + 1)}
+                    </div>
+                );
+                count++;
+            } else {
+                row.push(
                     <div key={index} className="form-group">
                         <label>{field.label}</label>
                         <input
                             type={field.type}
-                            name={fieldName}
+                            name={field.id}
                             placeholder={field.placeholder}
                             required={field.required}
-                            defaultValue={defaultValues[fieldName]}
+                            defaultValue={defaultValues[field.id]}
                             readOnly={field.readOnly}
-                            disabled={field.readOnly} // Also disables the field visually
+                            disabled={field.readOnly}
                         />
                     </div>
                 );
-            })}
+                count++;
+                if (count % 5 === 0) {
+                    rows.push(<div key={`row-${count}`} className="form-row">{row}</div>);
+                    row = [];
+                }
+            }
+        });
+
+        if (row.length > 0) {
+            rows.push(<div key={`row-end`} className="form-row">{row}</div>);
+        }
+
+        return rows;
+    };
+
+    return (
+        <form onSubmit={handleSubmit} className="general-form">
+            {renderFields(fields)}
             <button type="submit" className="submit-btn">Submit</button>
         </form>
     );
