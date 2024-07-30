@@ -4,11 +4,33 @@ import SvgComponent from '../../utils/SvgComponent';
 import './MainActionBtns.css';
 import GeneralForm from '../GeneralForm/GeneralForm';
 
+
 function MainActionBtns({ workerData, mainBtnActions, selectedBtnMainActions, setSelectedBtnMainActions }) {
     const handleSubmit = (formData) => {
         console.log('Form submitted:', formData);
-        // Handle form submission logic here, e.g., send data to the backend
+        createBook(formData);
     };
+    const createBook = async (book) => {
+        try {
+            const response = await fetch('http://192.168.1.11:7228/api/Book/CreateBook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(book),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create book');
+            }
+
+            const responseData = await response.json();
+            console.log('Book created:', responseData);
+        } catch (error) {
+            console.error('Error creating book:', error);
+        }
+    };
+
     return (
         <div className="action-btns-main">
             {mainBtnActions.map((btn, index) => (
