@@ -1,11 +1,18 @@
 import React from 'react'
 import "./Home.css"
 import packageJson from '../../package.json';
+import SvgComponent from '../utils/SvgComponent';
+
 import { LeftMenuAction, WorkerInformation } from '../component/MainMenu/MainMenu';
 import { btnActions } from '../constant/btnActions';
 import Header from '../component/Header/header';
-import SvgComponent from '../utils/SvgComponent';
-import { mainBtnActions } from '../constant/mainbtnActions';
+import {
+    DashboardBtnActions,
+    BookBtnActions,
+    MemberBtnActions,
+    AuthorBtnActions,
+    PublisherBtnActions
+} from '../constant/BtnStructure';
 import MainActionBtns from '../component/MainActionBtn/MainActionBtns';
 import InformationInDashboard from '../component/InformationInDashboard/InformationInDashboard';
 import { informationAbout } from '../constant/informationAbout';
@@ -18,6 +25,36 @@ function Home() {
     const [currentTime, setCurrentTime] = React.useState(new Date());
     const [selectedBtnMainActions, setSelectedBtnMainActions] = React.useState("");
     const selectedTitle = GeneralTableHeaderTitle.find(header => header.keyId === selectedBtn)?.title || 'Record Table';
+    const [dataActionsBtn, setDataActionsBtn] = React.useState(DashboardBtnActions);
+
+    React.useEffect(() => {
+        // Get the data for the selected button for the structure.
+        var data
+        switch (selectedBtn) {
+            case "Dashboard":
+                data = DashboardBtnActions;
+                break;
+            case "Books":
+                data = BookBtnActions;
+                break;
+            case "Members":
+                data = MemberBtnActions;
+                break;
+            case "Authors":
+                data = AuthorBtnActions;
+                break;
+            case "Publishers":
+                data = PublisherBtnActions;
+                break;
+            case "Switch":
+                data = DashboardBtnActions;
+                break;
+            default:
+                data = DashboardBtnActions;
+        }
+        setDataActionsBtn(data);
+    }, [selectedBtn]);
+
     const workerData = {
         name: "Yusef Turin",
         id: "W-001",
@@ -49,18 +86,20 @@ function Home() {
             <div className="right-screen">
                 <Header title={selectedBtn} searchData={""} />
                 <MainActionBtns
-                workerData={workerData}
-                    mainBtnActions={mainBtnActions}
+                    workerData={workerData}
+                    mainBtnActions={dataActionsBtn}
                     selectedBtnMainActions={selectedBtnMainActions}
                     setSelectedBtnMainActions={setSelectedBtnMainActions} />
-                <InformationInDashboard
-                    informationAbout={informationAbout} />
-                <GeneralTable data={borrowData} title={selectedTitle} />
+                {selectedBtn === "Dashboard" && (
+                    <InformationInDashboard
+                        informationAbout={informationAbout} />
+                )}
+
+                <GeneralTable data={borrowData} title={selectedTitle} selectedBtnMainActions={selectedBtnMainActions} />
             </div>
         </div>
     )
 }
-
 
 
 export default Home
