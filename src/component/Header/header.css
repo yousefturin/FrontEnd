@@ -22,8 +22,30 @@
     background-color: #EAEAEA;
     padding: 0 1rem;
     border-radius: 8rem;
-}
-.header-search input::placeholder{
-    color: #A0A0A0;
+    position: relative;
 }
 
+.header-search input {
+    position: relative;
+    transition: padding-left 0.5s ease;
+}
+
+.header-search input::placeholder {
+    position: absolute;
+    left: 10;
+    top: 35%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 1;
+}
+
+.header-search input.placeholder-hide::placeholder {
+    transform: translateY(-150%); /* Move the placeholder text out of view */
+    opacity: 0;
+}
+
+.header-search input.placeholder-show::placeholder {
+    transform: translateY(0); /* Move the placeholder text back into view */
+    opacity: 1;
+}
