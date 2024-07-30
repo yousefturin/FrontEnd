@@ -1,4 +1,3 @@
-/* MainActionBtns.css */
 .action-btns-main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(clamp(150px, 20vw, 200px), 1fr));
@@ -31,7 +30,7 @@
     top: 0;
     left: 0;
     width: calc(100% - 0.5rem);
-    height: clamp(100%, 30vh, 50vh);
+    height: clamp(100%, 55vh, 60vh);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     z-index: 10;
     cursor: default;
@@ -44,14 +43,15 @@
     background: #ff4d4d;
     border: none;
     color: white;
-    border-radius: 50%;
+    border-radius: 9999999rem;
     width: 2rem;
     height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    transition: background 0.3s;
 }
 
 .close-btn:hover {
@@ -68,9 +68,14 @@
 }
 
 .action-btn h3 {
-    height: 50%;
-    margin: 0;
+    margin: auto;
     margin-left: 0.5rem;
     margin-top: 0.3rem;
     color: black;
+}
+.form-container{
+    display: flex;
+    width: 100%;
+    margin: auto;
+    margin-left: 0.5rem;
 }
