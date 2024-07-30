@@ -1,12 +1,13 @@
 import React from 'react';
 import './GenerateTable.css';
 
-const GeneralTable = ({ data, title }) => {
+const GeneralTable = ({ data, title, selectedBtnMainActions }) => {
     // Get column names from the first item in the data array
     const columns = data.length > 0 ? Object.keys(data[0]) : [];
 
     return (
-        <div className="table-wrapper">
+        <div className={`table-wrapper ${selectedBtnMainActions !== null? 'expanded-data-table-padding' : ''}`}>
+            
             <div className="header-table">
                 <div className="header-table-title">
                     <h2>{title}</h2>
