@@ -11,14 +11,16 @@ import InformationInDashboard from '../component/InformationInDashboard/Informat
 import { informationAbout } from '../constant/informationAbout';
 import GeneralTable from '../component/GenerateTable/GenerateTable';
 import { borrowData } from '../constant/borrowData';
+import { GeneralTableHeaderTitle } from '../constant/GeneralTableHeader';
 
 function Home() {
     const [selectedBtn, setSelectedBtn] = React.useState("Dashboard");
     const [currentTime, setCurrentTime] = React.useState(new Date());
     const [selectedBtnMainActions, setSelectedBtnMainActions] = React.useState("");
-
+    const selectedTitle = GeneralTableHeaderTitle.find(header => header.keyId === selectedBtn)?.title || 'Record Table';
     const workerData = {
         name: "Yusef Turin",
+        id: "W-001",
     }
 
     return (
@@ -47,13 +49,13 @@ function Home() {
             <div className="right-screen">
                 <Header title={selectedBtn} searchData={""} />
                 <MainActionBtns
+                workerData={workerData}
                     mainBtnActions={mainBtnActions}
                     selectedBtnMainActions={selectedBtnMainActions}
                     setSelectedBtnMainActions={setSelectedBtnMainActions} />
                 <InformationInDashboard
                     informationAbout={informationAbout} />
-
-                <GeneralTable data={borrowData} title={"Last Transactions"} />
+                <GeneralTable data={borrowData} title={selectedTitle} />
             </div>
         </div>
     )
