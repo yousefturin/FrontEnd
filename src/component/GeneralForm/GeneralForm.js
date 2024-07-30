@@ -8,9 +8,9 @@ function GeneralForm({ fields, actionType, onSubmit }) {
         const initialValues = {};
         fields.forEach(field => {
             const fieldName = field.id;
-            if (fieldName === 'workerid') {
+            if (fieldName === 'workerId') {
                 initialValues[fieldName] = getDefaultWorkerId();
-            } else if (fieldName === 'enddate' || fieldName === 'returndate') {
+            } else if (fieldName === 'startDate' || fieldName === 'endDate') {
                 initialValues[fieldName] = getDefaultDate();
             } else if (fieldName === 'status') {
                 initialValues[fieldName] = getDefaultState();
@@ -45,7 +45,7 @@ function GeneralForm({ fields, actionType, onSubmit }) {
         const formData = new FormData(event.target);
         const data = {};
         fields.forEach(field => {
-            const fieldName = field.label.replace(/\s+/g, '').toLowerCase();
+            const fieldName = field.id;
             data[fieldName] = formData.get(fieldName) || defaultValues[fieldName] || '';
         });
         onSubmit(data);
@@ -54,7 +54,7 @@ function GeneralForm({ fields, actionType, onSubmit }) {
     return (
         <form onSubmit={handleSubmit} className="general-form">
             {fields.map((field, index) => {
-                const fieldName = field.label.replace(/\s+/g, '').toLowerCase();
+                const fieldName = field.id;
                 return (
                     <div key={index} className="form-group">
                         <label>{field.label}</label>
