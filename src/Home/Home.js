@@ -15,10 +15,9 @@ import {
 } from '../constant/BtnStructure';
 import MainActionBtns from '../component/MainActionBtn/MainActionBtns';
 import InformationInDashboard from '../component/InformationInDashboard/InformationInDashboard';
-import { informationAbout } from '../constant/informationAbout';
 import GeneralTable from '../component/GenerateTable/GenerateTable';
-import { borrowData } from '../constant/borrowData';
 import { GeneralTableHeaderTitle } from '../constant/GeneralTableHeader';
+import { useDynamicDataForTable, useBookData } from '../component/UseAction/useDataForTable';
 
 function Home() {
     const [selectedBtn, setSelectedBtn] = React.useState("Dashboard");
@@ -26,6 +25,9 @@ function Home() {
     const [selectedBtnMainActions, setSelectedBtnMainActions] = React.useState("");
     const selectedTitle = GeneralTableHeaderTitle.find(header => header.keyId === selectedBtn)?.title || 'Record Table';
     const [dataActionsBtn, setDataActionsBtn] = React.useState(DashboardBtnActions);
+    const [fetchedDataForTable, setFetchedDataForTable] = React.useState(null);
+    const [countStock, setCountStock] = React.useState(0);
+    const [countBorrow, setCountBorrow] = React.useState(0);
 
     React.useEffect(() => {
         // Get the data for the selected button for the structure.
@@ -51,15 +53,50 @@ function Home() {
                 break;
             default:
                 data = DashboardBtnActions;
+                break;
         }
         setDataActionsBtn(data);
     }, [selectedBtn]);
 
     const workerData = {
         name: "Yusef Turin",
-        id: "W-001",
+        id: "998824",
     }
+    const informationAbout = [
+        {
+            title: "Available Books",
+            num: countStock
+        },
+        {
+            title: "Borrowed Books",
+            num: countBorrow
+        },
+        {
+            title: "New Members",
+            num: "50"
+        }
+    ];
 
+    // (TODO)-> Make the URL dynamic
+    const fetchData = useDynamicDataForTable();
+    const fetchBookData = useBookData();
+
+    React.useEffect(() => {
+        fetchData().then(data => {
+            setFetchedDataForTable(data);
+                //  count the borrowed books 
+            const countB = data?.filter(item => item.status === 'B').length;
+            setCountBorrow(countB);
+        });
+    }, [fetchData]);
+
+    React.useEffect(() => {
+        fetchBookData().then(data => {
+            // count the total stock of available books
+            const totalStock = data?.reduce((sum, item) => sum + (item.stockNumber || 0), 0);
+            setCountStock(totalStock);
+        });
+    }, [fetchBookData]);
     return (
         <div className="dashboard">
             <div className="left-menu">
@@ -95,7 +132,7 @@ function Home() {
                         informationAbout={informationAbout} />
                 )}
 
-                <GeneralTable data={borrowData} title={selectedTitle} selectedBtnMainActions={selectedBtnMainActions} />
+                <GeneralTable data={fetchedDataForTable} title={selectedTitle} selectedBtnMainActions={selectedBtnMainActions} />
             </div>
         </div>
     )
