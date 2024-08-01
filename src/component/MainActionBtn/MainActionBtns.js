@@ -3,33 +3,67 @@ import React from 'react';
 import SvgComponent from '../../utils/SvgComponent';
 import './MainActionBtns.css';
 import GeneralForm from '../GeneralForm/GeneralForm';
-
+const BASE_URL = 'https://localhost:7228/api';
 
 function MainActionBtns({ workerData, mainBtnActions, selectedBtnMainActions, setSelectedBtnMainActions }) {
+    const currentAction = mainBtnActions.find(btn => btn.title === selectedBtnMainActions);
+
     const handleSubmit = (formData) => {
+        console.log(formData.id);
+        console.log(currentAction.method);
         console.log('Form submitted:', formData);
-        createBook(formData);
+        PostMethod(formData);
     };
-    const createBook = async (book) => {
-        try {
-            const response = await fetch('http://192.168.1.11:7228/api/Book/CreateBook', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(book),
-            });
 
-            if (!response.ok) {
-                throw new Error('Failed to create book');
-            }
+    const PostMethod = async (data) => {
+        switch (currentAction.method) {
+            case 'POST':
+            case 'PUT':
+                try {
+                    const response = await fetch(`${BASE_URL}/${currentAction.url}`, {
+                        method: `${currentAction.method}`,
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
 
-            const responseData = await response.json();
-            console.log('Book created:', responseData);
-        } catch (error) {
-            console.error('Error creating book:', error);
+                    if (!response.ok) {
+                        throw new Error(`Failed to ${currentAction.actionType}`);
+                    }
+
+                    const responseData = await response.json();
+                    console.log(`${currentAction.actionType} Created:`, responseData);
+                } catch (error) {
+                    console.error(`Error ${currentAction.actionType}`, error);
+                }
+                break;
+            case 'DELETE':
+                try {
+
+                    const response = await fetch(`${BASE_URL}/${currentAction.url}?id=${data.id}`, {
+                        method: `${currentAction.method}`,
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Failed to ${currentAction.actionType}`);
+                    }
+
+                    const responseData = await response.json();
+                    console.log(`${currentAction.actionType} Created:`, responseData);
+                } catch (error) {
+                    console.error(`Error ${currentAction.actionType}`, error);
+                }
+                break;
+            case 'GET':
+                console.log('GET method');
+                break;
+            default:
+                console.log('No method');
         }
+
     };
+
 
     return (
         <div className="action-btns-main">
@@ -69,6 +103,7 @@ function MainActionBtns({ workerData, mainBtnActions, selectedBtnMainActions, se
                     {selectedBtnMainActions === btn.title && (
                         <div className="form-container">
                             <GeneralForm
+                                workerData={workerData}
                                 fields={btn.fields}
                                 actionType={btn.actionType}
                                 onSubmit={handleSubmit}
