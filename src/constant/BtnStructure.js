@@ -3,6 +3,8 @@ const DashboardBtnActions = [
         logoId: "borrowBookSvg",
         title: "Borrow Book",
         actionType: "borrow",
+        url:"Borrow/PostBorrow",
+        method:"POST",
         fields: [
             {
                 id: "bookId",
@@ -13,7 +15,7 @@ const DashboardBtnActions = [
                 readOnly: false
             },
             {
-                id: "memberId",
+                id: "userID",
                 label: "Member ID",
                 type: "text",
                 placeholder: "Enter member ID",
@@ -58,9 +60,11 @@ const DashboardBtnActions = [
         logoId: "returnBookSvg",
         title: "Return Book",
         actionType: "return",
+        url: "Borrow/UpdateBorrowState",
+        method:"PUT",
         fields: [
             {
-                id: "borrowId",
+                id: "id",
                 label: "Borrow ID",
                 type: "text",
                 placeholder: "Enter Borrow ID",
@@ -97,6 +101,8 @@ const DashboardBtnActions = [
         logoId: "addBookSvg",
         title: "Add Book",
         actionType: "addBook",
+        url: "Book/CreateBook",
+        method:"POST",
         fields: [
             {
                 id: "Id",
@@ -174,6 +180,8 @@ const DashboardBtnActions = [
         logoId: "addMemberSvg",
         title: "Add Member",
         actionType: "addMember",
+        url: "User/CreateUser",
+        method:"POST",
         fields: [
             {
                 id: "id",
@@ -296,7 +304,9 @@ const DashboardBtnActions = [
     {
         logoId: "addAuthorSvg",
         title: "Add Author",
-        actionType: "",
+        actionType: "addAuthor",
+        url: "Author/CreateAuthor",
+        method:"POST",
         fields: [
             {
                 id: "fName",
@@ -327,7 +337,9 @@ const DashboardBtnActions = [
     {
         logoId: "addPublisherSvg",
         title: "Add Publisher",
-        actionType: "",
+        actionType: "addPublisher",
+        url: "Publisher/CreatePublisher",
+        method:"POST",
         fields: [
             {
                 id: "fName",
@@ -356,7 +368,7 @@ const DashboardBtnActions = [
         ]
     },
 ];
-
+// done with dashboard
 
 
 const BookBtnActions = [
@@ -364,6 +376,8 @@ const BookBtnActions = [
         logoId: "addBookSvg",
         title: "Add Book",
         actionType: "addBook",
+        url: "Book/CreateBook",
+        method:"POST",
         fields: [
             {
                 id: "Id",
@@ -441,9 +455,11 @@ const BookBtnActions = [
         logoId: "returnBookSvg",
         title: "Return Book",
         actionType: "return",
+        url: "Borrow/UpdateBorrowState",
+        method:"PUT",
         fields: [
             {
-                id: "borrowId",
+                id: "id",
                 label: "Borrow ID",
                 type: "text",
                 placeholder: "Enter Borrow ID",
@@ -480,6 +496,8 @@ const BookBtnActions = [
         logoId: "borrowBookSvg",
         title: "Borrow Book",
         actionType: "borrow",
+        url:"Borrow/PostBorrow",
+        method:"POST",
         fields: [
             {
                 id: "bookId",
@@ -490,7 +508,7 @@ const BookBtnActions = [
                 readOnly: false
             },
             {
-                id: "memberId",
+                id: "userID",
                 label: "Member ID",
                 type: "text",
                 placeholder: "Enter member ID",
@@ -531,10 +549,14 @@ const BookBtnActions = [
             },
         ]
     },
+
+
     {
         logoId: "deleteBookSvg",
         title: "Delete Book",
         actionType: "deleteBook",
+        url: "Book/DeleteBook",
+        method:"DELETE",
         fields: [
             {
                 id: "id",
@@ -550,6 +572,8 @@ const BookBtnActions = [
         logoId: "updateBookSvg",
         title: "Update Book",
         actionType: "updateBook",
+        url: "Book/UpdateBook",
+        method:"PUT",
         fields: [
             {
                 id: "Id",
@@ -627,6 +651,8 @@ const BookBtnActions = [
         logoId: "updateBookstockSvg",
         title: "Update Stock",
         actionType: "updateStock",
+        url: "Book/UpdateBookStock",
+        method:"PUT",
         fields: [
             {
                 id: "Id",
@@ -647,13 +673,15 @@ const BookBtnActions = [
         ]
     },
 ];
-
+// done with dashboard
 
 const MemberBtnActions = [
     {
         logoId: "addMemberSvg",
         title: "Add Member",
         actionType: "addMember",
+        url: "User/CreateUser",
+        method:"POST",
         fields: [
             {
                 id: "id",
@@ -773,11 +801,12 @@ const MemberBtnActions = [
             },
         ]
     },
-
     {
         logoId: "updateMemberSvg",
         title: "Update Member",
         actionType: "updateMember",
+        url: "User/UpdateUser",
+        method:"PUT",
         fields: [
             {
                 id: "id",
@@ -834,11 +863,13 @@ const MemberBtnActions = [
         logoId: "deleteMemberSvg",
         title: "Delete Member",
         actionType: "deleteMember",
+        url: "User/DeleteUser",
+        method:"DELETE",
         fields: [
             {
-                id: "memberId",
+                id: "id",
                 label: "Member ID",
-                type: "text",
+                type: "number",
                 placeholder: "Enter Member ID",
                 required: true,
                 readOnly: false
@@ -849,6 +880,8 @@ const MemberBtnActions = [
         logoId: "updateMemberAddressSvg",
         title: "Update Address",
         actionType: "updateAddress",
+        url: "Address/UpdateAddress",
+        method:"PUT",
         fields: [
             {
                 id: "id",
@@ -912,6 +945,8 @@ const MemberBtnActions = [
         logoId: "updateMemberContactSvg",
         title: "Update Contact",
         actionType: "updateContact",
+        url: "Contact/UpdateContact",
+        method:"PUT",
         fields: [
             {
                 id: "Id",
@@ -939,21 +974,16 @@ const MemberBtnActions = [
         ]
     },
 ];
+// done with dashboard
 
 const AuthorBtnActions = [
     {
         logoId: "addAuthorSvg",
         title: "Add Author",
         actionType: "addAuthor",
+        url: "Author/CreateAuthor",
+        method:"POST",
         fields: [
-            {
-                id: "id",
-                label: "Author ID",
-                type: "text",
-                placeholder: "Enter Author ID",
-                required: true,
-                readOnly: false
-            },
             {
                 id: "fName",
                 label: "First Name",
@@ -984,6 +1014,8 @@ const AuthorBtnActions = [
         logoId: "updateAuthorSvg",
         title: "Update Author",
         actionType: "updateAuthor",
+        url: "Author/UpdateAuthor",
+        method:"PUT",
         fields: [
             {
                 id: "id",
@@ -1020,11 +1052,49 @@ const AuthorBtnActions = [
         ]
     },
 ];
+// done with dashboard
+
+
 const PublisherBtnActions = [
     {
         logoId: "addPublisherSvg",
         title: "Add Publisher",
         actionType: "addPublisher",
+        url: "Publisher/CreatePublisher",
+        method:"POST",
+        fields: [
+            {
+                id: "fName",
+                label: "First Name",
+                type: "text",
+                placeholder: "Enter Fist Name",
+                required: true,
+                readOnly: false
+            },
+            {
+                id: "lName",
+                label: "Last Name",
+                type: "text",
+                placeholder: "Enter Last Name",
+                required: true,
+                readOnly: false
+            },
+            {
+                id: "bio",
+                label: "Bio",
+                type: "text",
+                placeholder: "Enter Bio",
+                required: true,
+                readOnly: false
+            },
+        ]
+    },
+    {
+        logoId: "updatePublisherSvg",
+        title: "Update Publisher",
+        actionType: "updatePublisher",
+        url: "Publisher/UpdatePublisher",
+        method:"PUT",
         fields: [
             {
                 id: "id",
@@ -1060,44 +1130,9 @@ const PublisherBtnActions = [
             },
         ]
     },
-    {
-        logoId: "updatePublisherSvg",
-        title: "Update Publisher",
-        actionType: "updatePublisher",
-        fields: [
-            {
-                id: "id",
-                label: "Author ID",
-                type: "text",
-                placeholder: "Enter Publisher ID",
-                required: true,
-                readOnly: false
-            },
-            {
-                id: "fName",
-                label: "First Name",
-                type: "text",
-                placeholder: "Enter Fist Name",
-                required: true,
-                readOnly: false
-            },
-            {
-                id: "lName",
-                label: "Last Name",
-                type: "text",
-                placeholder: "Enter Last Name",
-                required: true,
-                readOnly: false
-            },
-            {
-                id: "bio",
-                label: "Bio",
-                type: "text",
-                placeholder: "Enter Bio",
-                required: true,
-                readOnly: false
-            },
-        ]
-    },
 ];
+// done with dashboard
+
+
+
 export { DashboardBtnActions, BookBtnActions, MemberBtnActions, AuthorBtnActions, PublisherBtnActions };
