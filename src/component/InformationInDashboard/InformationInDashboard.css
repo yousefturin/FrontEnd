@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
     gap: 2rem; 
-    margin: 4rem 3rem;
+    margin: 6rem 3rem;
     justify-content: flex-start;
 }
 .info-card {
