@@ -5,6 +5,7 @@
     margin: 1rem 3rem;
     justify-content: center;
     position: relative;
+    min-height: 11vh;
 }
 
 .action-btn {
@@ -30,7 +31,7 @@
     top: 0;
     left: 0;
     width: calc(100% - 0.5rem);
-    height: clamp(100%, 55vh, 60vh);
+    height: clamp(100%, 45vh, 60vh);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     z-index: 10;
     cursor: default;
