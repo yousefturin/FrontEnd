@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './GeneralForm.css';
 
-function GeneralForm({ fields, actionType, onSubmit }) {
+function GeneralForm({ workerData, fields, actionType, onSubmit }) {
     const [defaultValues, setDefaultValues] = useState({});
 
     useEffect(() => {
@@ -22,7 +22,7 @@ function GeneralForm({ fields, actionType, onSubmit }) {
         setDefaultValues(initialValues);
     }, [fields, actionType]);
 
-    const getDefaultWorkerId = () => "12345";
+    const getDefaultWorkerId = () => workerData.id;
     const getDefaultState = () => (actionType === "borrow" ? "borrow" : actionType === "return" ? "returned" : "");
     const getDefaultDate = () => new Date().toISOString().split('T')[0];
 
@@ -48,6 +48,15 @@ function GeneralForm({ fields, actionType, onSubmit }) {
         if (actionType === "addBook") {
             data.author = null;
             data.publisher = null;
+        }
+        // Ensure password is included as null if actionType is addMember
+        if (actionType === "addMember") {
+            data.password = "empty";
+        }
+        if (actionType === "updateMember") {
+            data.password = "empty";
+            data.address = null;
+            data.contact = null;
         }
 
         onSubmit(data);
