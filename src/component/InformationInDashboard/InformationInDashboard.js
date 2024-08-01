@@ -5,13 +5,13 @@ import CountUp from 'react-countup';
 function InformationInDashboard({ informationAbout, selectedBtnMainActions }) {
     return (
         <div className="info-card-main">
-            {informationAbout.map((info, index) => {
+            {informationAbout?.map((info, index) => {
                 return (
                     <div className="info-card" key={index}>
                         <h2>
                             <CountUp
                                 start={0}
-                                end={info.num}
+                                end={info?.num}
                                 duration={2.5} // Duration in seconds
                                 separator=","
                             />
