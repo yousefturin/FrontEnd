@@ -5,6 +5,7 @@
 
 .left-menu {
     width: clamp(280px, 30%, 380px);
+    min-height: 100vh;
     display: inherit;
     background-color: #EAEAEA;
     flex-direction: column;
@@ -63,6 +64,7 @@
 .selected-btn{
     background-color: #fff;
     box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+    outline: 1px solid #dfdede;
 }
 .content-help-action{
     display: flex;
